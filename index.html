@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f6f7f4" />
+  <meta name="description" content="Relay answers every call, qualifies every lead, and books more jobs for home service businesses." />
+  <title>Relay — Every call becomes a next step</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#home" aria-label="Relay home"><span class="brand-mark">r</span><span>relay</span></a>
+      <div class="workspace-switch"><div class="workspace-icon">H</div><div><strong>Harbor Plumbing</strong><small>Pro workspace</small></div><span class="chevron">⌄</span></div>
+      <div class="nav-label">WORKSPACE</div>
+      <nav class="nav-list" aria-label="Main navigation">
+        <button class="nav-item active" data-view="overview"><span class="nav-icon">◫</span>Overview</button>
+        <button class="nav-item" data-view="conversations"><span class="nav-icon">▤</span>Conversations <span class="nav-count" id="navCount">4</span></button>
+        <button class="nav-item" data-view="calendar"><span class="nav-icon">▦</span>Bookings</button>
+        <button class="nav-item" data-view="analytics"><span class="nav-icon">⌁</span>Analytics</button>
+      </nav>
+      <div class="nav-label settings-label">SETTINGS</div>
+      <nav class="nav-list"><button class="nav-item" data-view="assistant"><span class="nav-icon">✳</span>AI receptionist</button><button class="nav-item" data-view="settings"><span class="nav-icon">⚙</span>Settings</button></nav>
+      <div class="sidebar-bottom"><div class="help-card"><div class="help-icon">✦</div><strong>Need a hand?</strong><p>Our team is one message away.</p><button id="helpBtn">Chat with support <span>↗</span></button></div><div class="profile"><div class="avatar">JD</div><div><strong>Jordan Davis</strong><small>Owner</small></div><span class="chevron">···</span></div></div>
+    </aside>
+
+    <main class="main-content" id="home">
+      <header class="topbar"><div class="breadcrumb">Harbor Plumbing <span>/</span> <strong id="crumb">Overview</strong></div><div class="top-actions"><span class="live-status"><i></i> AI receptionist is live</span><button class="icon-button" aria-label="Notifications" id="notifBtn">♧<b></b></button><div class="top-avatar">JD</div></div></header>
+      <div class="page-wrap">
+        <section class="welcome-row"><div><div class="eyebrow"><span class="spark">✳</span> MONDAY, OCTOBER 26, 2026</div><h1 id="pageTitle">Good morning, Jordan <span class="wave">✦</span></h1><p class="subhead" id="pageSubtitle">Here’s what’s happening with your calls today.</p></div><button class="primary-button" id="testCall"><span>＋</span> Test your AI receptionist</button></section>
+
+        <section class="metric-grid" aria-label="Business metrics">
+          <article class="metric-card"><div class="metric-top"><span>Calls handled</span><span class="metric-icon mint">↗</span></div><div class="metric-value">128 <span class="trend">↑ 18%</span></div><div class="metric-foot">vs. 108 last month <span class="mini-chart mint-chart">▂▃▂▅▄▆▅▇</span></div></article>
+          <article class="metric-card"><div class="metric-top"><span>Jobs booked</span><span class="metric-icon lavender">▦</span></div><div class="metric-value">36 <span class="trend">↑ 12%</span></div><div class="metric-foot">28% call-to-book rate <span class="mini-chart purple-chart">▂▄▃▅▄▆▅▇</span></div></article>
+          <article class="metric-card"><div class="metric-top"><span>Revenue recovered</span><span class="metric-icon peach">＄</span></div><div class="metric-value">$8,420 <span class="trend">↑ 24%</span></div><div class="metric-foot">From calls you would’ve missed <span class="mini-chart orange-chart">▂▃▅▄▆▄▆▇</span></div></article>
+          <article class="metric-card"><div class="metric-top"><span>Avg. response time</span><span class="metric-icon blue">◷</span></div><div class="metric-value">12<span class="unit"> sec</span> <span class="trend">↓ 32%</span></div><div class="metric-foot">Your fastest month yet <span class="mini-chart blue-chart">▆▅▆▄▃▄▂▃</span></div></article>
+        </section>
+
+        <section class="content-grid">
+          <article class="panel conversation-panel"><div class="panel-heading"><div><h2>Recent conversations</h2><p>Every lead gets a thoughtful response.</p></div><button class="text-button" data-open="conversations">View all <span>→</span></button></div>
+            <div class="conversation-list" id="conversationList">
+              <button class="conversation-row" data-name="Maya Chen" data-issue="Kitchen sink leak" data-time="10:42 AM" data-status="Booked"><div class="contact-avatar a1">MC</div><div class="conversation-main"><div class="contact-line"><strong>Maya Chen</strong><span class="time">10:42 AM</span></div><div class="conversation-preview">“There’s water under my kitchen sink…”</div><div class="conversation-tags"><span class="tag booked">● Booked</span><span class="tag">Plumbing repair</span></div></div><div class="row-chevron">›</div></button>
+              <button class="conversation-row" data-name="Daniel Brooks" data-issue="Water heater inspection" data-time="10:18 AM" data-status="Needs follow-up"><div class="contact-avatar a2">DB</div><div class="conversation-main"><div class="contact-line"><strong>Daniel Brooks</strong><span class="time">10:18 AM</span></div><div class="conversation-preview">“Can someone take a look at our water heater?”</div><div class="conversation-tags"><span class="tag followup">● Needs follow-up</span><span class="tag">Water heater</span></div></div><div class="row-chevron">›</div></button>
+              <button class="conversation-row" data-name="Alicia Torres" data-issue="Emergency pipe burst" data-time="9:56 AM" data-status="Urgent"><div class="contact-avatar a3">AT</div><div class="conversation-main"><div class="contact-line"><strong>Alicia Torres</strong><span class="time">9:56 AM</span></div><div class="conversation-preview">“A pipe burst in the basement, help!”</div><div class="conversation-tags"><span class="tag urgent">● Urgent</span><span class="tag">Emergency</span></div></div><div class="row-chevron">›</div></button>
+              <button class="conversation-row" data-name="Marcus Reed" data-issue="Bathroom faucet replacement" data-time="9:31 AM" data-status="Booked"><div class="contact-avatar a4">MR</div><div class="conversation-main"><div class="contact-line"><strong>Marcus Reed</strong><span class="time">9:31 AM</span></div><div class="conversation-preview">“Looking to replace two bathroom faucets.”</div><div class="conversation-tags"><span class="tag booked">● Booked</span><span class="tag">Installation</span></div></div><div class="row-chevron">›</div></button>
+            </div>
+          </article>
+          <div class="right-column"><article class="panel activity-panel"><div class="panel-heading"><div><h2>Call activity</h2><p>Your business, at a glance.</p></div><button class="period-select" id="periodBtn">This week <span>⌄</span></button></div><div class="chart-summary"><div><strong>84</strong><span>calls this week</span></div><div class="chart-legend"><span><i class="legend-call"></i>Calls</span><span><i class="legend-booked"></i>Booked</span></div></div><div class="chart" aria-label="Call activity chart"><div class="chart-y"><span>30</span><span>20</span><span>10</span><span>0</span></div><div class="chart-body"><div class="grid-line gl1"></div><div class="grid-line gl2"></div><div class="grid-line gl3"></div><div class="grid-line gl4"></div><div class="bar-group"><div class="bar-pair"><i style="height:54%"></i><b style="height:30%"></b></div><small>Mon</small></div><div class="bar-group"><div class="bar-pair"><i style="height:76%"></i><b style="height:50%"></b></div><small>Tue</small></div><div class="bar-group"><div class="bar-pair"><i style="height:61%"></i><b style="height:38%"></b></div><small>Wed</small></div><div class="bar-group"><div class="bar-pair"><i style="height:91%"></i><b style="height:62%"></b></div><small>Thu</small></div><div class="bar-group"><div class="bar-pair"><i style="height:70%"></i><b style="height:43%"></b></div><small>Fri</small></div><div class="bar-group"><div class="bar-pair"><i style="height:42%"></i><b style="height:24%"></b></div><small>Sat</small></div><div class="bar-group"><div class="bar-pair"><i style="height:27%"></i><b style="height:14%"></b></div><small>Sun</small></div></div></div></article>
+            <article class="assistant-card"><div class="assistant-orb"><span>✳</span></div><div class="assistant-copy"><div class="assistant-status"><i></i> WORKING FOR YOU</div><h3>Your AI receptionist is on it.</h3><p>It’s answered <strong>12 calls</strong> while you focus on the job.</p><button id="assistantLink">See how it works <span>→</span></button></div><div class="orb-glow"></div></article>
+          </div>
+        </section>
+        <footer><span>Made for the people who keep things running.</span><span>Relay <b>·</b> Your business, in good hands.</span></footer>
+      </div>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <div class="modal-backdrop" id="modal" aria-hidden="true"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" id="modalClose" aria-label="Close">×</button><div class="modal-kicker"><span class="spark">✳</span> RELAY AI RECEPTIONIST</div><h2 id="modalTitle">Try the experience</h2><p class="modal-desc">See what happens when Relay picks up a call for Harbor Plumbing.</p><div class="call-demo" id="callDemo"><div class="call-orb">✳</div><div class="call-state" id="callState">Ready when you are</div><div class="call-caption" id="callCaption">No setup needed for this demo.</div><button class="call-button" id="callButton"><span>☎</span> Start demo call</button></div><div class="modal-note"><span>✦</span> Relay answers in seconds, captures the details, and routes urgent jobs to your team.</div></section></div>
+  <div class="detail-drawer" id="drawer" aria-hidden="true"><button class="modal-close" id="drawerClose" aria-label="Close">×</button><div class="drawer-kicker">CONVERSATION DETAILS</div><div class="drawer-person"><div class="contact-avatar a1" id="drawerAvatar">MC</div><div><h2 id="drawerName">Maya Chen</h2><p>Today · <span id="drawerTime">10:42 AM</span></p></div></div><div class="drawer-status" id="drawerStatus">● Booked</div><div class="drawer-topic"><small>REQUEST</small><strong id="drawerIssue">Kitchen sink leak</strong></div><div class="chat-bubble ai-bubble"><small>RELAY AI · 10:43 AM</small><p>Thanks for calling Harbor Plumbing! I can help get this taken care of. Is water actively leaking right now?</p></div><div class="chat-bubble customer-bubble"><small>CUSTOMER · 10:44 AM</small><p>Yes, a little. I put a bucket underneath.</p></div><div class="chat-bubble ai-bubble"><small>RELAY AI · 10:44 AM</small><p>Got it. I found an opening today between 1–3 PM. I’ve sent your details to the team and reserved that window for you.</p></div><button class="primary-button full-button" id="drawerAction">Open conversation <span>→</span></button></div>
+  <script src="app.js"></script>
+</body>
+</html>
