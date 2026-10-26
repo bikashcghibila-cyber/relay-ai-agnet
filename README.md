@@ -1,37 +1,51 @@
 # Relay
 
-**Every call becomes a next step.** Relay is an AI receptionist for home service businesses. It answers calls when a crew is on a job, gathers the details, handles routine booking requests, and escalates urgent work to a person.
+Relay is a call and lead workflow prototype for home-service businesses. This repository now includes a local web app and a small persistent HTTP API backed by SQLite.
 
-This repository contains a responsive, interactive product prototype. Open `index.html` in a browser to explore the owner dashboard, inspect sample conversations, and run the simulated urgent-call flow. The dashboard uses sample data; it is not connected to a phone number, calendar, payment system, or AI voice service.
+## Run locally
 
-## Customer and problem
+Requires Python 3.10 or later. No third-party Python packages are needed.
 
-Start with independent plumbing and HVAC companies with 3–30 field technicians. Calls arrive while owners and technicians are driving, on a job, or after hours. A missed emergency call can become a lost job and a lost customer. Relay should prove that it captures incremental booked work without forcing the owner to change how the crew operates.
+```bash
+python3 server.py
+```
 
-## First sellable version
+Open [http://127.0.0.1:8765](http://127.0.0.1:8765). Stop the server with `Ctrl+C`. The app creates `data/relay.sqlite3` and seeds four sample conversations the first time it starts. The `data/` directory is ignored by Git.
 
-1. Forward unanswered calls to a Relay number; support after-hours coverage and an owner-defined schedule.
-2. Collect caller name, callback number, service address, issue, and urgency with a natural voice conversation.
-3. Send a concise SMS to the owner or dispatcher; transfer urgent calls to the on-call person.
-4. Offer appointment windows from the business's availability and confirm by text.
-5. Show call recordings/transcripts, consent controls, outcomes, and a simple recovered-jobs report.
+To use another database path or port:
 
-Start with plumbing only in one service area. Keep a human escalation path for emergencies, uncertain answers, pricing questions, and callers who ask for a person. Do not let the assistant promise a diagnosis or quote before the business has configured its rules.
+```bash
+RELAY_DB_PATH=/path/to/relay.sqlite3 PORT=9000 python3 server.py
+```
 
-## Pricing hypothesis
+## What works in this MVP
 
-- **Starter — $199/month:** one location, missed-call and after-hours coverage, call summaries, and a monthly call allowance.
-- **Growth — $399/month:** booking workflows, calendar connection, multiple team members, and higher usage.
-- **Multi-location — from $999/month:** shared reporting, location-specific rules, and priority support.
+- Persistent SQLite records for a demo business, conversations, messages, and bookings.
+- Dashboard totals, estimated booked-job value, response time, and a weekly activity chart read from the database.
+- A simulated receptionist call that writes a new urgent lead and its transcript to the database.
+- Conversation detail view with saved status changes.
+- JSON API served from the same origin as the UI.
 
-Validate willingness to pay with paid pilots. Track gross margin per answered minute, number porting and telephony costs, support load, bookings per account, and churn before locking in tiers. A reasonable initial proof point is 10 local businesses paying for a 30-day pilot and renewing because tracked recovered work exceeds the monthly fee.
+## API
 
-## Path to a durable business
+- `GET /api/health` — service and database status.
+- `GET /api/dashboard` — business, metrics, weekly calls, and recent conversations.
+- `GET /api/conversations` — conversations for the demo business.
+- `GET /api/conversations/{id}` — conversation plus messages and optional booking.
+- `POST /api/demo/calls` — create a sample urgent call and transcript.
+- `POST /api/conversations/{id}/status` — update status (`Booked`, `Needs follow-up`, `Urgent`, `New`, or `Resolved`).
+- `GET /api/bookings` — list confirmed demo bookings.
+- `POST /api/bookings` — create a two-hour booking with `conversation_id` and timezone-aware ISO-8601 `starts_at`.
 
-Win one trade and geography with reliable call handling and measurable booked jobs. Expand into adjacent home-service trades, then add the workflow layer owners already use: dispatch, estimates, payments, and customer follow-up. The long-term opportunity is becoming the voice and lead-conversion layer for service SMBs, with integrations and outcome data creating retention. That is a high-upside thesis, not a promise of billionaire income; execution, customer trust, distribution, and unit economics decide whether it becomes a business.
+Example:
 
-## Prototype files
+```bash
+curl http://127.0.0.1:8765/api/dashboard
+curl -X POST http://127.0.0.1:8765/api/demo/calls
+```
 
-- `index.html` — dashboard structure and sample customer interactions.
-- `styles.css` — responsive visual system.
-- `app.js` — navigation, conversation drawer, notifications, and simulated AI call.
+## Scope and next integrations
+
+This is a local single-business MVP. It does **not** answer real phone calls, run a real AI voice model, send SMS, connect to a calendar, authenticate users, or charge subscriptions. The demo call is synthetic. Before deploying for real businesses, add sign-in and tenant-level authorization, production database and migrations, HTTPS, backups, rate limits, privacy/consent and retention controls, plus provider integrations (telephony, voice AI, SMS, and calendars). Never expose this local server directly to the public internet.
+
+The initial target customer is an independent plumbing or HVAC company with 3–30 technicians. Validate the idea with paid pilots before locking in the pricing hypothesis.
